@@ -29,9 +29,9 @@ public class OrderController {
     @PostMapping
     public void createOrder(@RequestBody Order order) {
         log.info("Create order called: order={}", order);
-        int orderId = orderIdCounter.incrementAndGet();
-        var productName = order.productName() + ThreadLocalRandom.current().nextInt(100);
-        var orderToSave = new Order(Integer.toString(orderId), productName);
+        var productName = order.getProductName() + ThreadLocalRandom.current().nextInt(100);
+        var orderToSave = new Order();
+        orderToSave.setProductName(productName);
         orderService.save(orderToSave);
     }
 }

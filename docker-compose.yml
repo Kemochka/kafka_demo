@@ -23,19 +23,5 @@ services:
         '5433:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
-  producer:
-    build: ./producer  # Директория с Dockerfile для продюсера
-    depends_on:
-      - kafka
-  consumer:
-    build: ./consumer  # Директория с Dockerfile для консьюмера
-    depends_on:
-      - kafka
-      - db
-    environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres_db:5432/kafkadb
-      - SPRING_DATASOURCE_USERNAME=admin
-      - SPRING_DATASOURCE_PASSWORD=password
-      - SPRING_KAFKA_BOOTSTRAP-SERVERS=kafka:9092
 volumes:
   postgres_data:
